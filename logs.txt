@@ -1,0 +1,1 @@
+tsc library.ts --outFile library.js -w
