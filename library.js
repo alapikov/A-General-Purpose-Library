@@ -48,3 +48,16 @@ function isKeyboardSymbol(symbol) {
     }
     return false;
 }
+function getFactorial(input) {
+    var multiplier = input - 1;
+    var result = input;
+    while (multiplier > 1) {
+        result = result * multiplier;
+        multiplier--;
+    }
+    return result;
+}
+function subtractArr(input, arrOfExtra) {
+    var result = input.filter(function (el) { return !arrOfExtra.includes(el); });
+    return result;
+}

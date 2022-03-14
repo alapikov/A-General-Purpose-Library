@@ -53,3 +53,18 @@ function isKeyboardSymbol(symbol: string) {
     }
     return false;
 }
+
+function getFactorial(input: number) {
+    let multiplier = input - 1;
+    let result = input;
+    while (multiplier > 1) {
+        result = result * multiplier;
+        multiplier--;
+    }
+    return result;
+}
+
+function subtractArr(input: (string | number)[], arrOfExtra: (string | number)[]) {    
+    let result = input.filter(el => !arrOfExtra.includes(el))
+    return result
+}
