@@ -168,3 +168,99 @@ function mergeSort(input) {
         return merge(mergeSort(arrLeft), mergeSort(arrRight));
     }
 }
+function getMinsOfArr(input, numOfMins) {
+    var copy = __spreadArray([], input, true);
+    var mins = [];
+    function getMin() {
+        var numMin = copy[0];
+        var minIndex = 0;
+        for (var q = 1; q < copy.length; q++) {
+            if (copy[q] < numMin) {
+                numMin = copy[q];
+                minIndex = q;
+            }
+        }
+        mins.push(numMin);
+        copy.splice(minIndex, minIndex + 1);
+    }
+    for (var r = 0; r < numOfMins; r++) {
+        getMin();
+    }
+    if (numOfMins === 1) {
+        return mins[0];
+    }
+    else {
+        return mins;
+    }
+}
+function getMaxsOfArr(input, numOfMaxs) {
+    var copy = __spreadArray([], input, true);
+    var maxs = [];
+    function getMaxs() {
+        var numMax = copy[0];
+        var maxIndex = 0;
+        for (var q = 1; q < copy.length; q++) {
+            if (copy[q] > numMax) {
+                numMax = copy[q];
+                maxIndex = q;
+            }
+        }
+        maxs.push(numMax);
+        copy.splice(maxIndex, maxIndex + 1);
+    }
+    for (var r = 0; r < numOfMaxs; r++) {
+        getMaxs();
+    }
+    if (numOfMaxs === 1) {
+        return maxs[0];
+    }
+    else {
+        return maxs;
+    }
+}
+function hasDuplicates(input) {
+    var copy = __spreadArray([], input, true);
+    copy = copy.sort();
+    for (var q = 1; q < copy.length; q++) {
+        if (copy[q] === copy[q - 1]) {
+            return true;
+        }
+    }
+    return false;
+}
+function getDuplicates(input) {
+    var copy = __spreadArray([], input, true);
+    var duplicates = [];
+    copy = copy.sort();
+    for (var q = 1; q < copy.length; q++) {
+        if (copy[q] === copy[q - 1]) {
+            duplicates.push(copy[q]);
+        }
+    }
+    if (duplicates.length === 0) {
+        return -1;
+    }
+    (function reduceDuplicates() {
+        for (var r = 1; r < duplicates.length; r++) {
+            if (duplicates[r] === duplicates[r - 1]) {
+                duplicates.splice(r - 1, 1);
+                reduceDuplicates();
+            }
+        }
+    }());
+    if (duplicates.length === 1) {
+        return duplicates[0];
+    }
+    else {
+        return duplicates;
+    }
+}
+function deleteBiggerThan(input, num) {
+    var result = input.filter(function (el) { return el <= num; });
+    return result;
+}
+function deleteSmallerThan(input, num) {
+    var result = input.filter(function (el) { return el >= num; });
+    return result;
+}
+// -------------- 21 functions
