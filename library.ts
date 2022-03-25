@@ -64,6 +64,23 @@ function getFactorial(input: number) {
     return result;
 }
 
+function getFibonacciSeq(numOfElems: number) {
+    const sequence = [1, 1];
+    for (let q = 2; q < numOfElems; q++) {
+        const l = sequence.length;
+        const nextItem = sequence[l - 1] + sequence[l - 2];
+        sequence.push(nextItem);
+    }
+    return sequence;
+}
+
+function getFibonacciItem(index: number) {
+    if (index === 1 || index === 2) {
+        return 1
+    }
+    return getFibonacciItem(index - 1) + getFibonacciItem(index - 2);
+}
+
 function subtractArr(input: (string | number)[], arrOfExtra: (string | number)[]) {    
     let result = input.filter(el => !arrOfExtra.includes(el));
     return result;
@@ -178,6 +195,10 @@ function mergeSort(input: number[]) {
     }
 }
 
+function quickSort(input: number[]) {
+
+}
+
 function getMinsOfArr(input: number[], numOfMins: number) {
     const copy = [...input];
     const mins: number[] = [];
@@ -268,4 +289,47 @@ function deleteSmallerThan(input: number[], num: number) {
     return result;
 }
 
-// -------------- 21 functions
+// -------------- 23 functions
+
+function getFileName(input: string) {
+    const regexp = /\w+\./;
+    let fileName = input.match(regexp);
+    fileName = fileName[0].slice(0, -1);
+    return fileName;
+}
+
+function getFileNameFull(input: string) {
+    const regexp = /\w+\.\w+/;
+    let fileName = input.match(regexp);
+    return fileName;
+}
+
+function searchItemLinear(input: (string | number)[], item: (string | number)) {
+    for (let q = 0; q < input.length; q++) {
+        if (input[q] === item) {
+            return q;
+        }
+    }
+    return null;
+}
+
+function searchItemBinary(input: number[], item: number) {
+    let copy = [...input];
+    let arrStart = 0;
+    let arrEnd = copy.length;
+    let middleIndex;
+    let itemIsFound = false
+    while (itemIsFound === false && arrStart <= arrEnd) {
+        middleIndex = Math.floor((arrStart + arrEnd) / 2);
+        if (copy[middleIndex] === item) {
+            itemIsFound = true;
+            return middleIndex;
+        }
+        if (copy[middleIndex] > item) {
+            arrEnd = middleIndex - 1;
+        } else if (copy[middleIndex] < item) {
+            arrStart = middleIndex + 1;
+        }
+    }
+    if (itemIsFound === false) {return null}
+}

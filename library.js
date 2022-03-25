@@ -66,6 +66,21 @@ function getFactorial(input) {
     }
     return result;
 }
+function getFibonacciSeq(numOfElems) {
+    var sequence = [1, 1];
+    for (var q = 2; q < numOfElems; q++) {
+        var l = sequence.length;
+        var nextItem = sequence[l - 1] + sequence[l - 2];
+        sequence.push(nextItem);
+    }
+    return sequence;
+}
+function getFibonacciItem(index) {
+    if (index === 1 || index === 2) {
+        return 1;
+    }
+    return getFibonacciItem(index - 1) + getFibonacciItem(index - 2);
+}
 function subtractArr(input, arrOfExtra) {
     var result = input.filter(function (el) { return !arrOfExtra.includes(el); });
     return result;
@@ -168,6 +183,8 @@ function mergeSort(input) {
         return merge(mergeSort(arrLeft), mergeSort(arrRight));
     }
 }
+function quickSort(input) {
+}
 function getMinsOfArr(input, numOfMins) {
     var copy = __spreadArray([], input, true);
     var mins = [];
@@ -263,4 +280,46 @@ function deleteSmallerThan(input, num) {
     var result = input.filter(function (el) { return el >= num; });
     return result;
 }
-// -------------- 21 functions
+// -------------- 23 functions
+function getFileName(input) {
+    var regexp = /\w+\./;
+    var fileName = input.match(regexp);
+    fileName = fileName[0].slice(0, -1);
+    return fileName;
+}
+function getFileNameFull(input) {
+    var regexp = /\w+\.\w+/;
+    var fileName = input.match(regexp);
+    return fileName;
+}
+function searchItemLinear(input, item) {
+    for (var q = 0; q < input.length; q++) {
+        if (input[q] === item) {
+            return q;
+        }
+    }
+    return null;
+}
+function searchItemBinary(input, item) {
+    var copy = __spreadArray([], input, true);
+    var arrStart = 0;
+    var arrEnd = copy.length;
+    var middleIndex;
+    var itemIsFound = false;
+    while (itemIsFound === false && arrStart <= arrEnd) {
+        middleIndex = Math.floor((arrStart + arrEnd) / 2);
+        if (copy[middleIndex] === item) {
+            itemIsFound = true;
+            return middleIndex;
+        }
+        if (copy[middleIndex] > item) {
+            arrEnd = middleIndex - 1;
+        }
+        else if (copy[middleIndex] < item) {
+            arrStart = middleIndex + 1;
+        }
+    }
+    if (itemIsFound === false) {
+        return null;
+    }
+}
