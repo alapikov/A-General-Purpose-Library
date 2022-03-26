@@ -289,8 +289,6 @@ function deleteSmallerThan(input: number[], num: number) {
     return result;
 }
 
-// -------------- 23 functions
-
 function getFileName(input: string) {
     const regexp = /\w+\./;
     let fileName = input.match(regexp);
@@ -333,3 +331,57 @@ function searchItemBinary(input: number[], item: number) {
     }
     if (itemIsFound === false) {return null}
 }
+
+function graphBreadthSearch(graph: {}, start: string, end: string) {
+    let queue = [];
+    queue.push(start);
+    while (queue.length > 0) {
+        const nodeCurrent = queue.shift();
+        if (!graph[nodeCurrent]) {
+            graph[nodeCurrent] = [];
+        }
+        if (graph[nodeCurrent].includes(end)) {
+            return true;
+        } else {
+            queue = [...queue, ...graph[nodeCurrent]];
+        }
+    }
+    return false;
+}
+
+class TreeNode {
+    constructor(value: string, descendants: string[]) {
+        this.value = value;
+        this.descs = descendants;
+    }
+    get numOfDescs() {
+        return this.descs.length;
+    }
+    
+}
+
+class BinaryDigitTreeNode {
+    constructor(value: (number | null), descRight: {value: (number | null), descRight: {}, decsLeft: {}}, descLeft: {value: (number | null), descRight: {}, decsLeft: {}}) {
+        this.value = value;
+        this.descRight = descRight;
+        this.descLeft = descLeft;
+    }    
+}
+
+function isValid_BinaryDigitTree(input: {}) {
+    if (typeof (input.value) !== 'number') {
+        return false
+    }
+    if (typeof (input.descRight.value) !== ('number' || 'object') &&
+        typeof (input.descLeft.value) !== ('number' || 'object')) {
+            return false
+    } else {
+        isValid_BinaryDigitTree(input.decsRight);
+        isValid_BinaryDigitTree(input.decsLeft);
+    }
+    return true;
+
+}
+
+//-------------- 32 functions
+

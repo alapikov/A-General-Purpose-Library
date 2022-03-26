@@ -280,7 +280,6 @@ function deleteSmallerThan(input, num) {
     var result = input.filter(function (el) { return el >= num; });
     return result;
 }
-// -------------- 23 functions
 function getFileName(input) {
     var regexp = /\w+\./;
     var fileName = input.match(regexp);
@@ -322,4 +321,58 @@ function searchItemBinary(input, item) {
     if (itemIsFound === false) {
         return null;
     }
+}
+function graphBreadthSearch(graph, start, end) {
+    var queue = [];
+    queue.push(start);
+    while (queue.length > 0) {
+        var nodeCurrent = queue.shift();
+        if (!graph[nodeCurrent]) {
+            graph[nodeCurrent] = [];
+        }
+        if (graph[nodeCurrent].includes(end)) {
+            return true;
+        }
+        else {
+            queue = __spreadArray(__spreadArray([], queue, true), graph[nodeCurrent], true);
+        }
+    }
+    return false;
+}
+//-------------- 29 functions
+var TreeNode = /** @class */ (function () {
+    function TreeNode(value, descendants) {
+        this.value = value;
+        this.descs = descendants;
+    }
+    Object.defineProperty(TreeNode.prototype, "numOfDescs", {
+        get: function () {
+            return this.descs.length;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    return TreeNode;
+}());
+var BinaryDigitTreeNode = /** @class */ (function () {
+    function BinaryDigitTreeNode(value, descRight, descLeft) {
+        this.value = value;
+        this.descRight = descRight;
+        this.descLeft = descLeft;
+    }
+    return BinaryDigitTreeNode;
+}());
+function isValid_BinaryDigitTree(input) {
+    if (typeof (input.value) !== 'number') {
+        return false;
+    }
+    if (typeof (input.descRight.value) !== ('number' || 'object') &&
+        typeof (input.descLeft.value) !== ('number' || 'object')) {
+        return false;
+    }
+    else {
+        isValid_BinaryDigitTree(input.decsRight);
+        isValid_BinaryDigitTree(input.decsLeft);
+    }
+    return true;
 }
