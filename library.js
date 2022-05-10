@@ -66,6 +66,13 @@ function getFactorial(input) {
     }
     return result;
 }
+function getFactorialRecursive(input) {
+    if (input === 1) {
+        return input;
+    }
+    else
+        return input * getFactorialRecursive(input - 1);
+}
 function getFibonacciSeq(numOfElems) {
     var sequence = [1, 1];
     for (var q = 2; q < numOfElems; q++) {
@@ -98,7 +105,7 @@ function mlsToKms(miles) {
     return kms;
 }
 function celsToFahr(celsius) {
-    var fahrenheit = ((celsius * 1.8) + 32).toFixed(1);
+    var fahrenheit = (celsius * 1.8 + 32).toFixed(1);
     return fahrenheit;
 }
 function fahrToCels(fahrenheit) {
@@ -167,8 +174,7 @@ function mergeSort(input) {
         var q = 0;
         var r = 0;
         while (q < arr1.length && r < arr2.length) {
-            result.push((arr1[q] < arr2[r]) ?
-                arr1[q++] : arr2[r++]);
+            result.push(arr1[q] < arr2[r] ? arr1[q++] : arr2[r++]);
         }
         return __spreadArray(__spreadArray(__spreadArray([], result, true), arr1.slice(q), true), arr2.slice(r), true);
     }
@@ -183,8 +189,7 @@ function mergeSort(input) {
         return merge(mergeSort(arrLeft), mergeSort(arrRight));
     }
 }
-function quickSort(input) {
-}
+function quickSort(input) { }
 function getMinsOfArr(input, numOfMins) {
     var copy = __spreadArray([], input, true);
     var mins = [];
@@ -264,7 +269,7 @@ function getDuplicates(input) {
                 reduceDuplicates();
             }
         }
-    }());
+    })();
     if (duplicates.length === 1) {
         return duplicates[0];
     }
@@ -339,7 +344,6 @@ function graphBreadthSearch(graph, start, end) {
     }
     return false;
 }
-//-------------- 29 functions
 var TreeNode = /** @class */ (function () {
     function TreeNode(value, descendants) {
         this.value = value;
@@ -363,11 +367,10 @@ var BinaryDigitTreeNode = /** @class */ (function () {
     return BinaryDigitTreeNode;
 }());
 function isValid_BinaryDigitTree(input) {
-    if (typeof (input.value) !== 'number') {
+    if (typeof input.value !== 'number') {
         return false;
     }
-    if (typeof (input.descRight.value) !== ('number' || 'object') &&
-        typeof (input.descLeft.value) !== ('number' || 'object')) {
+    if (typeof input.descRight.value !== ('number' || 'object') && typeof input.descLeft.value !== ('number' || 'object')) {
         return false;
     }
     else {
@@ -376,3 +379,45 @@ function isValid_BinaryDigitTree(input) {
     }
     return true;
 }
+function isValidFilename(filename, ext) {
+    var regexp = new RegExp('\\.' + ext + '$');
+    if (filename.match(regexp)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+function formatPhonenum(input) {
+    var numArr = input.toString().split('');
+    var wrongStyle = false;
+    if (numArr[0] === '8') {
+        wrongStyle = true;
+    }
+    numArr.splice(1, 0, ' (');
+    numArr.splice(5, 0, ') ');
+    numArr.splice(9, 0, '-');
+    numArr.splice(12, 0, '-');
+    if (wrongStyle === true) {
+        numArr[0] = '7';
+        numArr.unshift('+');
+    }
+    else {
+        numArr.unshift('+');
+    }
+    return numArr.join('');
+}
+function correctText(input) {
+    var text = input.split('');
+    if (text[0].toLowerCase() === text[0]) {
+        text[0] = text[0].toUpperCase();
+    }
+    for (var q = 1; q < text.length; q++) {
+        if (text[q].match(/\W/) && text[q - 1] === text[q]) {
+            text.splice(q - 1, 1);
+            q--;
+        }
+    }
+    return text.join('');
+}
+//-------------- 36 functions

@@ -8,3 +8,19 @@ const leopardus = new TreeNode('Leopardus', ['Margay', 'Ocelot', 'Pampas Cat', '
 const leptailurus = new TreeNode('Leptailurus', ['Serval']);
 const caracal = new TreeNode('Caracal', ['African Golden Cat', 'Caracal']);
 const neofelis = new TreeNode('Neofelis', ['Sunda Clouded Leopard', 'Clouded Leopard ']);
+
+const binaryTree1 = {
+    value: 10,
+    descRight: {
+        value: 13,
+        decsRight: null,
+        decsLeft: {
+            value: 4,
+            decsRight: {
+                value: 7
+            },
+            decsLeft: 12
+        }
+    },
+    descLeft: {}
+}
