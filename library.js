@@ -285,6 +285,47 @@ function deleteSmallerThan(input, num) {
     var result = input.filter(function (el) { return el >= num; });
     return result;
 }
+function roundDecimalNum(num, decimals) {
+    var index = Math.pow(10, decimals);
+    return Math.round((num + Number.EPSILON) * index) / index;
+}
+function getRandomArr(length, min, max, decimals) {
+    if (decimals === void 0) { decimals = 0; }
+    var resultArr = [];
+    var indexB = Math.pow(10, decimals);
+    var indexA = roundDecimalNum(Math.pow(10, (-1 * decimals)), decimals);
+    for (var q = 1; q <= length; q++) {
+        var item = Math.floor(Math.random() * (max - min + 1) + min) + indexA * (Math.floor(Math.random() * indexB));
+        item = roundDecimalNum(item, decimals);
+        if (item > max) {
+            item = item - 1;
+        }
+        resultArr.push(item);
+    }
+    return resultArr;
+}
+function sumEveryNth(arr, n) {
+    var result = 0;
+    for (var q = (n - 1); q < arr.length; q = q + n) {
+        result = result + arr[q];
+    }
+    return result;
+}
+function multiplyEveryNth(arr, n) {
+    var result = 1;
+    for (var q = (n - 1); q < arr.length; q = q + n) {
+        result = result * arr[q];
+    }
+    return result;
+}
+function getPowerRecursive(num, exp) {
+    if (exp === 0) {
+        return 1;
+    }
+    else {
+        return num * getPowerRecursive(num, exp - 1);
+    }
+}
 function getFileName(input) {
     var regexp = /\w+\./;
     var fileName = input.match(regexp);
@@ -296,7 +337,7 @@ function getFileNameFull(input) {
     var fileName = input.match(regexp);
     return fileName;
 }
-function searchItemLinear(input, item) {
+function searchSimple(input, item) {
     for (var q = 0; q < input.length; q++) {
         if (input[q] === item) {
             return q;
@@ -304,7 +345,7 @@ function searchItemLinear(input, item) {
     }
     return null;
 }
-function searchItemBinary(input, item) {
+function searchBinary(input, item) {
     var copy = __spreadArray([], input, true);
     var arrStart = 0;
     var arrEnd = copy.length;
@@ -388,7 +429,7 @@ function isValidFilename(filename, ext) {
         return false;
     }
 }
-function formatPhonenum(input) {
+function formatPhoneNumber(input) {
     var numArr = input.toString().split('');
     var wrongStyle = false;
     if (numArr[0] === '8') {
@@ -420,4 +461,4 @@ function correctText(input) {
     }
     return text.join('');
 }
-//-------------- 36 functions
+//-------------- 40 functions
