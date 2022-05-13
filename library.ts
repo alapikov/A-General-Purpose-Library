@@ -1,3 +1,9 @@
+function swapArrElems(arr: [], indexA: number, indexB: number) {
+	const buff = arr[indexA];
+	arr[indexA] = arr[indexB];
+	arr[indexB] = buff;
+}
+
 function isLatinLetter(letter: string) {
 	if (letter.length >= 2) {
 		console.error(`' ${letter} '` + ' consists of two or more letters! Use only one-letter string as a parameter.');
@@ -477,4 +483,48 @@ function correctText(input: string) {
 	return text.join('');
 }
 
-//-------------- 40 functions
+function getMiddleIndex(arr: any[]) {
+	return Math.floor(arr.length / 2 - 1)
+}
+
+function heapify(arr: number[], length: number, middleIndex: number) {
+	let largest = middleIndex;
+	let left = middleIndex * 2 + 1;
+	let right = left + 1;
+	if (left < length && arr[left] > arr[largest]) {
+		largest = left;
+	}
+	if (right < length && arr[right] > arr[largest]) {
+		largest = right;
+	}
+	if (largest != middleIndex) {
+		swapArrElems(arr, middleIndex, largest);
+		heapify(arr, length, largest)
+	}
+	return arr;
+}
+
+function sortHeap(arr: number[]) {
+	let middleIndex = getMiddleIndex(arr);
+	let lastIndex = arr.length - 1
+	while (middleIndex >= 0) {
+		heapify(arr, arr.length, middleIndex);
+		middleIndex--;
+	}
+
+	while (lastIndex >= 0) {
+		swapArrElems(arr, 0, lastIndex);
+		heapify(arr, lastIndex, 0);
+		lastIndex--;
+	}
+	return arr;
+}
+
+class LinkedListNode {
+	constructor(value: any, next: any = null) {
+		this.value = value;
+		this.next = next;
+	}
+}
+
+//-------------- 44 functions
