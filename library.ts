@@ -1,3 +1,5 @@
+/* This is a general-purpose function library written in JavaScript with TypeScript static type checker. It contains functions of different use-cases, most of them can be used not only in frontend development, but in other fields too. I frequently add new functions to practice my skills, capture some useful solutions I implemented in other projects of mine or to learn a new topic in porgramming. Functions are sorted by their type and field of use. */
+
 function swapArrElems(arr: [], indexA: number, indexB: number) {
 	const buff = arr[indexA];
 	arr[indexA] = arr[indexB];
